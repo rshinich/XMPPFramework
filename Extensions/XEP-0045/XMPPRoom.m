@@ -241,6 +241,25 @@ enum XMPPRoomState
 	return YES;
 }
 
+- (void)joinRoomWithPacket:(XMPPPresence *)joinPresence {
+
+    dispatch_block_t block = ^{ @autoreleasepool {
+
+//        XMPPLogTrace2(@"%@[%@] - %@", THIS_FILE, roomJID, THIS_METHOD);
+
+        [xmppStream sendElement:joinPresence];
+
+        state |= kXMPPRoomStateJoining;
+
+    }};
+
+    if (dispatch_get_specific(moduleQueueTag))
+        block();
+    else
+        dispatch_async(moduleQueue, block);
+
+}
+
 - (void)joinRoomUsingNickname:(NSString *)desiredNickname history:(NSXMLElement *)history
 {
 	[self joinRoomUsingNickname:desiredNickname history:history password:nil];

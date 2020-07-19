@@ -100,6 +100,7 @@ static NSString *const XMPPMUCOwnerNamespace = @"http://jabber.org/protocol/muc#
  * @see fetchConfigurationForm
  * @see configureRoomUsingOptions:
 **/
+- (void)joinRoomWithPacket:(XMPPPresence *)joinPresence;
 - (void)joinRoomUsingNickname:(NSString *)desiredNickname history:(nullable NSXMLElement *)history;
 - (void)joinRoomUsingNickname:(NSString *)desiredNickname history:(nullable NSXMLElement *)history password:(nullable NSString *)passwd;
 
